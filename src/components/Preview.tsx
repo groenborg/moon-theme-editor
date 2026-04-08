@@ -3,15 +3,10 @@ export function Preview({ theme, font }) {
   const s = (i) => ({ color: p[i] })
   return (
     <div
+      className="py-6 px-8 text-sm leading-[1.9] whitespace-pre-wrap flex-1 overflow-auto"
       style={{
         background: bg,
-        padding: "24px 32px",
         fontFamily: `"${font}", var(--font-mono)`,
-        fontSize: 14,
-        lineHeight: 1.9,
-        whiteSpace: "pre-wrap",
-        flex: 1,
-        overflow: "auto",
       }}
     >
       <span style={s(8)}>{"# Moon theme preview"}</span>
@@ -89,15 +84,8 @@ export function Preview({ theme, font }) {
       <span style={{ color: fg }}>()</span>
       {"\n"}
       <span
-        style={{
-          display: "inline-block",
-          width: 7,
-          height: 16,
-          background: theme.cursorColor,
-          borderRadius: 1,
-          animation: "blink 1s step-end infinite",
-          verticalAlign: "text-bottom",
-        }}
+        className="inline-block w-[7px] h-4 rounded-[1px] animate-blink align-text-bottom"
+        style={{ background: theme.cursorColor }}
       />
     </div>
   )

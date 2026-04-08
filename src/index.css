@@ -1,49 +1,38 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
+@import "tailwindcss";
 
-:root {
-  /* Chrome colors -- matched to Buildkite dark indigo */
-  --chrome-bg-deep: #14102b;
-  --chrome-bg-primary: #19143a;
-  --chrome-bg-secondary: #1e1842;
-  --chrome-bg-tertiary: #2a2254;
-  --chrome-bg-input: #1b1540;
+@theme {
+  /* Chrome background colors */
+  --color-chrome-bg-deep: #14102b;
+  --color-chrome-bg-primary: #19143a;
+  --color-chrome-bg-secondary: #1e1842;
+  --color-chrome-bg-tertiary: #2a2254;
+  --color-chrome-bg-input: #1b1540;
 
-  --chrome-text-primary: #cbc4dd;
-  --chrome-text-secondary: #8e86a6;
-  --chrome-text-tertiary: #5e5678;
-  --chrome-text-accent: #cbc4dd;
-  --chrome-text-green: #6ee7b7;
+  /* Chrome text colors */
+  --color-chrome-text-primary: #cbc4dd;
+  --color-chrome-text-secondary: #8e86a6;
+  --color-chrome-text-tertiary: #5e5678;
+  --color-chrome-text-accent: #cbc4dd;
+  --color-chrome-text-green: #6ee7b7;
 
-  --chrome-border: rgba(140, 130, 170, 0.12);
-  --chrome-border-focus: rgba(140, 130, 170, 0.25);
+  /* Chrome border colors */
+  --color-chrome-border: rgba(140, 130, 170, 0.12);
+  --color-chrome-border-focus: rgba(140, 130, 170, 0.25);
+
+  /* Semantic colors */
+  --color-bg-success: #1a2e1f;
+  --color-text-success: #6ecf8a;
 
   /* Fonts */
   --font-ui: "Noto Sans Mono", ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
   --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
 
-  /* Sidebar */
-  --sidebar-width: 380px;
+  /* Animations */
+  --animate-blink: blink 1s step-end infinite;
+}
 
-  /* Legacy aliases for ColorSwatch / ExportPanel compatibility */
-  --font-sans: var(--font-ui);
-  --color-background-primary: var(--chrome-bg-primary);
-  --color-background-secondary: var(--chrome-bg-secondary);
-  --color-background-tertiary: var(--chrome-bg-tertiary);
-  --color-background-success: #1a2e1f;
-  --color-background-info: #1a2440;
-  --color-text-primary: var(--chrome-text-primary);
-  --color-text-secondary: var(--chrome-text-secondary);
-  --color-text-tertiary: var(--chrome-text-tertiary);
-  --color-text-success: #6ecf8a;
-  --color-text-info: #7eaaff;
-  --color-border-primary: rgba(255, 255, 255, 0.35);
-  --color-border-secondary: var(--chrome-border);
-  --color-border-tertiary: var(--chrome-border);
+:root {
+  --sidebar-width: 380px;
 }
 
 html, body {
@@ -53,8 +42,8 @@ html, body {
 
 body {
   font-family: var(--font-ui);
-  background: var(--chrome-bg-deep);
-  color: var(--chrome-text-primary);
+  background: var(--color-chrome-bg-deep);
+  color: var(--color-chrome-text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -89,8 +78,8 @@ body {
   bottom: 0;
   width: var(--sidebar-width);
   max-width: 90vw;
-  background: var(--chrome-bg-secondary);
-  border-left: 1px solid var(--chrome-border);
+  background: var(--color-chrome-bg-secondary);
+  border-left: 1px solid var(--color-chrome-border);
   z-index: 101;
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -112,17 +101,17 @@ body {
   font-family: var(--font-ui);
   font-size: 13px;
   cursor: pointer;
-  border: 1px solid var(--chrome-border);
+  border: 1px solid var(--color-chrome-border);
   background: transparent;
-  color: var(--chrome-text-secondary);
+  color: var(--color-chrome-text-secondary);
   transition: background 0.15s, color 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
 
 .kbd-badge:hover {
-  background: var(--chrome-bg-tertiary);
-  color: var(--chrome-text-primary);
-  border-color: var(--chrome-border-focus);
+  background: var(--color-chrome-bg-tertiary);
+  color: var(--color-chrome-text-primary);
+  border-color: var(--color-chrome-border-focus);
 }
 
 /* Animations */
@@ -146,6 +135,6 @@ body {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: var(--chrome-bg-tertiary);
+  background: var(--color-chrome-bg-tertiary);
   border-radius: 3px;
 }

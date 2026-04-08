@@ -1,4 +1,20 @@
+import { cva } from "class-variance-authority"
 import { useState } from "react"
+
+const copyButton = cva(
+  "absolute top-3 right-3 z-[2] border-[0.5px] border-chrome-border rounded-[6px] px-3.5 py-[5px] text-xs cursor-pointer font-ui font-medium transition-all duration-200",
+  {
+    variants: {
+      copied: {
+        true: "bg-bg-success text-text-success",
+        false: "bg-chrome-bg-secondary text-chrome-text-secondary",
+      },
+    },
+    defaultVariants: {
+      copied: false,
+    },
+  },
+)
 
 export function ExportPanel({ theme, variant, font }) {
   const [copied, setCopied] = useState(false)
@@ -47,47 +63,11 @@ export function ExportPanel({ theme, variant, font }) {
     })
   }
   return (
-    <div style={{ position: "relative" }}>
-      <button
-        onClick={copy}
-        style={{
-          position: "absolute",
-          top: 12,
-          right: 12,
-          zIndex: 2,
-          background: copied
-            ? "var(--color-background-success)"
-            : "var(--color-background-secondary)",
-          color: copied
-            ? "var(--color-text-success)"
-            : "var(--color-text-secondary)",
-          border: "0.5px solid var(--color-border-tertiary)",
-          borderRadius: 6,
-          padding: "5px 14px",
-          fontSize: 12,
-          cursor: "pointer",
-          fontFamily: "var(--font-sans)",
-          fontWeight: 500,
-          transition: "all 0.2s",
-        }}
-      >
+    <div className="relative">
+      <button onClick={copy} className={copyButton({ copied })}>
         {copied ? "Copied" : "Copy"}
       </button>
-      <pre
-        style={{
-          background: "var(--color-background-secondary)",
-          borderRadius: 10,
-          padding: "20px 24px",
-          fontFamily: "var(--font-mono)",
-          fontSize: 12,
-          lineHeight: 1.7,
-          color: "var(--color-text-secondary)",
-          overflow: "auto",
-          border: "0.5px solid var(--color-border-tertiary)",
-          margin: 0,
-          whiteSpace: "pre-wrap",
-        }}
-      >
+      <pre className="bg-chrome-bg-secondary rounded-[10px] py-5 px-6 font-mono text-xs leading-[1.7] text-chrome-text-secondary overflow-auto border-[0.5px] border-chrome-border m-0 whitespace-pre-wrap">
         {text}
       </pre>
     </div>

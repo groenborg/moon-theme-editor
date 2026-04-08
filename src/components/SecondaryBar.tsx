@@ -1,15 +1,6 @@
 export function SecondaryBar({ variant }) {
   return (
-    <div
-      style={{
-        padding: "8px 20px",
-        background: "var(--chrome-bg-deep)",
-        fontFamily: "var(--font-ui)",
-        fontSize: 13,
-        color: "var(--chrome-text-tertiary)",
-        flexShrink: 0,
-      }}
-    >
+    <div className="px-5 py-2 bg-chrome-bg-deep font-ui text-[13px] text-chrome-text-tertiary shrink-0">
       ~/moon-editor/{variant} 0.092s
     </div>
   )

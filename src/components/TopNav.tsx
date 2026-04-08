@@ -2,58 +2,21 @@ export function NavItem({ onClick, label, text }) {
   return (
     <button
       onClick={onClick}
-      style={{
-        background: "none",
-        border: "none",
-        padding: 0,
-        cursor: "pointer",
-        fontFamily: "var(--font-ui)",
-        fontSize: 14,
-        color: "var(--chrome-text-secondary)",
-        transition: "color 0.15s",
-      }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.color = "var(--chrome-text-primary)")
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.color = "var(--chrome-text-secondary)")
-      }
+      className="bg-none border-none p-0 cursor-pointer font-ui text-sm text-chrome-text-secondary hover:text-chrome-text-primary transition-colors duration-150"
     >
-      <span style={{ fontWeight: 700 }}>[{label}]</span> {text}
+      <span className="font-bold">[{label}]</span> {text}
     </button>
   )
 }
 
 export function TopNav({ onToggleSidebar }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 24,
-        padding: "10px 20px",
-        background: "var(--chrome-bg-secondary)",
-        borderBottom: "1px solid var(--chrome-border)",
-        fontFamily: "var(--font-ui)",
-        fontSize: 14,
-        flexShrink: 0,
-        flexWrap: "wrap",
-      }}
-    >
-      <span
-        style={{
-          fontWeight: 700,
-          color: "var(--chrome-text-primary)",
-        }}
-      >
-        Moon Editor
-      </span>
-      <span style={{ color: "var(--chrome-text-tertiary)" }}>
+    <div className="flex items-center gap-6 px-5 py-2.5 bg-chrome-bg-secondary border-b border-chrome-border font-ui text-sm shrink-0 flex-wrap">
+      <span className="font-bold text-chrome-text-primary">Moon Editor</span>
+      <span className="text-chrome-text-tertiary">
         Type{" "}
-        <span style={{ color: "var(--chrome-text-primary)", fontWeight: 600 }}>
-          help
-        </span>{" "}
-        for options
+        <span className="text-chrome-text-primary font-semibold">help</span> for
+        options
       </span>
       <NavItem onClick={onToggleSidebar} label="E" text="show editor" />
       <NavItem label="D" text="Docs" />

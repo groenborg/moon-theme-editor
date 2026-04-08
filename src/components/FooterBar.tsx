@@ -1,41 +1,11 @@
 export function FooterBar({ variant, font, theme }) {
   const dot = (
-    <span style={{ color: "var(--chrome-text-tertiary)", opacity: 0.5 }}>
-      {" · "}
-    </span>
+    <span className="text-chrome-text-tertiary opacity-50">{" · "}</span>
   )
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        padding: "5px 20px",
-        background: "var(--chrome-bg-secondary)",
-        borderTop: "1px solid var(--chrome-border)",
-        fontFamily: "var(--font-ui)",
-        fontSize: 12,
-        color: "var(--chrome-text-tertiary)",
-        flexShrink: 0,
-        gap: 4,
-      }}
-    >
-      <span
-        style={{
-          display: "inline-flex",
-          gap: 3,
-          alignItems: "center",
-          marginRight: 4,
-        }}
-      >
-        <span
-          style={{
-            display: "inline-block",
-            width: 7,
-            height: 7,
-            borderRadius: "50%",
-            background: "var(--chrome-text-green)",
-          }}
-        />
+    <div className="flex items-center px-5 py-[5px] bg-chrome-bg-secondary border-t border-chrome-border font-ui text-xs text-chrome-text-tertiary shrink-0 gap-1">
+      <span className="inline-flex gap-[3px] items-center mr-1">
+        <span className="inline-block w-[7px] h-[7px] rounded-full bg-chrome-text-green" />
         Theme Ready
       </span>
       {dot}

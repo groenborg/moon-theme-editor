@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-Single-page React 19 app (Vite 8, TypeScript) for editing Ghostty terminal color themes. No router, no state library, no CSS framework.
+Single-page React 19 app (Vite 8, TypeScript) for editing Ghostty terminal color themes. No router, no state library. Uses Tailwind CSS v4 for utility styling and class-variance-authority (CVA) for component variants.
 
 **`src/MoonEditor.tsx`** — top-level stateful component managing variant (dark/light), color values, font selection, and view mode (preview/export).
 
@@ -31,7 +31,7 @@ Single-page React 19 app (Vite 8, TypeScript) for editing Ghostty terminal color
 
 ## Styling
 
-All component styles are inline `style={{}}` objects. Global CSS variables for the editor UI (not the theme being edited) live in `src/index.css` and auto-switch via `prefers-color-scheme`. The theme preview area uses colors from the user-editable palette directly, not CSS variables.
+Tailwind utility classes for static UI styles. CVA (`cva()`) for components with variants (ColorSwatch, ExportPanel, EditorSidebar tabs). Dynamic theme colors from the user-editable palette remain as inline `style={{}}`. Global CSS variables and component classes (sidebar, kbd-badge) live in `src/index.css` with Tailwind's `@theme` block for token registration.
 
 ## Export Format
 

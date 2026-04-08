@@ -1,5 +1,27 @@
+import { cva } from "class-variance-authority"
 import { ColorSwatch } from "./ColorSwatch"
 import { FONTS, NAMES } from "./constants"
+
+const tabButton = cva(
+  "px-[18px] py-[7px] text-[13px] font-ui font-medium border-none rounded-[7px] cursor-pointer transition-all duration-200",
+  {
+    variants: {
+      active: {
+        true: "bg-chrome-bg-tertiary text-chrome-text-primary shadow-[0_1px_3px_rgba(0,0,0,0.15)]",
+        false: "bg-transparent text-chrome-text-tertiary shadow-none",
+      },
+    },
+    defaultVariants: {
+      active: false,
+    },
+  },
+)
+
+const sectionLabel =
+  "text-[11px] font-medium text-chrome-text-tertiary uppercase tracking-[0.05em] block mb-2"
+
+const toggleGroup =
+  "inline-flex gap-[3px] p-[3px] bg-chrome-bg-primary rounded-[9px]"
 
 export function EditorSidebar({
   open,
@@ -15,22 +37,6 @@ export function EditorSidebar({
   setPalette,
   resetTheme,
 }) {
-  const tabStyle = (active) => ({
-    padding: "7px 18px",
-    fontSize: 13,
-    fontFamily: "var(--font-ui)",
-    fontWeight: 500,
-    border: "none",
-    borderRadius: 7,
-    cursor: "pointer",
-    background: active ? "var(--chrome-bg-tertiary)" : "transparent",
-    color: active
-      ? "var(--chrome-text-primary)"
-      : "var(--chrome-text-tertiary)",
-    boxShadow: active ? "0 1px 3px rgba(0,0,0,0.15)" : "none",
-    transition: "all 0.2s",
-  })
-
   return (
     <>
       <div
@@ -38,22 +44,8 @@ export function EditorSidebar({
         onClick={onClose}
       />
       <div className={`sidebar${open ? " open" : ""}`}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 24,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 15,
-              fontWeight: 600,
-              color: "var(--chrome-text-primary)",
-              fontFamily: "var(--font-ui)",
-            }}
-          >
+        <div className="flex justify-between items-center mb-6">
+          <span className="text-[15px] font-semibold text-chrome-text-primary font-ui">
             Theme Editor
           </span>
           <button className="kbd-badge" onClick={onClose}>
@@ -62,37 +54,17 @@ export function EditorSidebar({
         </div>
 
         {/* Variant toggle */}
-        <div style={{ marginBottom: 20 }}>
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              color: "var(--chrome-text-tertiary)",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              display: "block",
-              marginBottom: 8,
-            }}
-          >
-            Variant
-          </span>
-          <div
-            style={{
-              display: "inline-flex",
-              gap: 3,
-              padding: 3,
-              background: "var(--chrome-bg-primary)",
-              borderRadius: 9,
-            }}
-          >
+        <div className="mb-5">
+          <span className={sectionLabel}>Variant</span>
+          <div className={toggleGroup}>
             <button
-              style={tabStyle(variant === "dark")}
+              className={tabButton({ active: variant === "dark" })}
               onClick={() => setVariant("dark")}
             >
               Dark
             </button>
             <button
-              style={tabStyle(variant === "light")}
+              className={tabButton({ active: variant === "light" })}
               onClick={() => setVariant("light")}
             >
               Light
@@ -101,37 +73,17 @@ export function EditorSidebar({
         </div>
 
         {/* View toggle */}
-        <div style={{ marginBottom: 20 }}>
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              color: "var(--chrome-text-tertiary)",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              display: "block",
-              marginBottom: 8,
-            }}
-          >
-            View
-          </span>
-          <div
-            style={{
-              display: "inline-flex",
-              gap: 3,
-              padding: 3,
-              background: "var(--chrome-bg-primary)",
-              borderRadius: 9,
-            }}
-          >
+        <div className="mb-5">
+          <span className={sectionLabel}>View</span>
+          <div className={toggleGroup}>
             <button
-              style={tabStyle(view === "preview")}
+              className={tabButton({ active: view === "preview" })}
               onClick={() => setView("preview")}
             >
               Preview
             </button>
             <button
-              style={tabStyle(view === "export")}
+              className={tabButton({ active: view === "export" })}
               onClick={() => setView("export")}
             >
               Export
@@ -140,37 +92,16 @@ export function EditorSidebar({
         </div>
 
         {/* Font selector */}
-        <div style={{ marginBottom: 20 }}>
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              color: "var(--chrome-text-tertiary)",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              display: "block",
-              marginBottom: 8,
-            }}
-          >
-            Font
-          </span>
+        <div className="mb-5">
+          <span className={sectionLabel}>Font</span>
           <select
             value={font}
             onChange={(e) => setFont(e.target.value)}
+            className="w-full px-2.5 py-2 text-[13px] bg-chrome-bg-primary text-chrome-text-primary border border-chrome-border rounded-[7px] cursor-pointer appearance-auto mb-1.5"
             style={{
-              width: "100%",
-              padding: "8px 10px",
-              fontSize: 13,
               fontFamily: font
                 ? `"${font}", var(--font-mono)`
                 : "var(--font-mono)",
-              background: "var(--chrome-bg-primary)",
-              color: "var(--chrome-text-primary)",
-              border: "1px solid var(--chrome-border)",
-              borderRadius: 7,
-              cursor: "pointer",
-              appearance: "auto",
-              marginBottom: 6,
             }}
           >
             {FONTS.map((f) => (
@@ -184,70 +115,24 @@ export function EditorSidebar({
             placeholder="or type a font name"
             value={FONTS.some((f) => f.value === font) ? "" : font}
             onChange={(e) => setFont(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "8px 10px",
-              fontSize: 12,
-              fontFamily: "var(--font-mono)",
-              background: "var(--chrome-bg-primary)",
-              color: "var(--chrome-text-primary)",
-              border: "1px solid var(--chrome-border)",
-              borderRadius: 7,
-            }}
+            className="w-full px-2.5 py-2 text-xs font-mono bg-chrome-bg-primary text-chrome-text-primary border border-chrome-border rounded-[7px]"
           />
         </div>
 
         {/* Base colors */}
-        <div style={{ marginBottom: 20 }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 8,
-            }}
-          >
-            <span
-              style={{
-                fontSize: 11,
-                fontWeight: 500,
-                color: "var(--chrome-text-tertiary)",
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-              }}
-            >
+        <div className="mb-5">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-[11px] font-medium text-chrome-text-tertiary uppercase tracking-[0.05em]">
               Base Colors
             </span>
             <button
               onClick={resetTheme}
-              style={{
-                background: "none",
-                border: "none",
-                color: "var(--chrome-text-tertiary)",
-                fontSize: 11,
-                cursor: "pointer",
-                fontFamily: "var(--font-ui)",
-                padding: "2px 6px",
-                borderRadius: 4,
-                transition: "color 0.15s",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--chrome-text-primary)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--chrome-text-tertiary)")
-              }
+              className="bg-none border-none text-chrome-text-tertiary text-[11px] cursor-pointer font-ui px-1.5 py-0.5 rounded hover:text-chrome-text-primary transition-colors duration-150"
             >
               Reset defaults
             </button>
           </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 2,
-            }}
-          >
+          <div className="grid grid-cols-2 gap-0.5">
             <ColorSwatch
               label="Background"
               color={theme.background}
@@ -277,26 +162,8 @@ export function EditorSidebar({
 
         {/* Palette */}
         <div>
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              color: "var(--chrome-text-tertiary)",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              display: "block",
-              marginBottom: 8,
-            }}
-          >
-            Palette
-          </span>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 2,
-            }}
-          >
+          <span className={sectionLabel}>Palette</span>
+          <div className="grid grid-cols-2 gap-0.5">
             {theme.palette.map((c, i) => (
               <ColorSwatch
                 key={`${variant}-${i}`}

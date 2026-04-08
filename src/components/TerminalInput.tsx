@@ -1,42 +1,14 @@
 export function TerminalInput() {
   return (
-    <div
-      style={{
-        padding: "12px 20px 16px",
-        background: "var(--chrome-bg-primary)",
-        borderTop: "1px solid var(--chrome-border)",
-        fontFamily: "var(--font-ui)",
-        flexShrink: 0,
-      }}
-    >
-      <span
-        style={{
-          display: "inline-block",
-          color: "var(--chrome-text-secondary)",
-          padding: "3px 10px",
-          borderRadius: 4,
-          fontSize: 13,
-          fontWeight: 500,
-          marginBottom: 10,
-          border: "1px solid var(--chrome-border)",
-        }}
-      >
+    <div className="px-5 pt-3 pb-4 bg-chrome-bg-primary border-t border-chrome-border font-ui shrink-0">
+      <span className="inline-block text-chrome-text-secondary px-2.5 py-[3px] rounded text-[13px] font-medium mb-2.5 border border-chrome-border">
         ~/moon-editor
       </span>
       <div>
         <input
           type="text"
           placeholder="Type '/' or 'help' to see options"
-          style={{
-            width: "100%",
-            background: "transparent",
-            border: "none",
-            outline: "none",
-            color: "var(--chrome-text-tertiary)",
-            fontFamily: "var(--font-ui)",
-            fontSize: 14,
-            caretColor: "var(--chrome-text-primary)",
-          }}
+          className="w-full bg-transparent border-none outline-none text-chrome-text-tertiary font-ui text-sm caret-chrome-text-primary"
         />
       </div>
     </div>

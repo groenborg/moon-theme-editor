@@ -1,69 +1,58 @@
+import { cva } from "class-variance-authority"
 import { useRef } from "react"
+
+const swatchWrapper = cva(
+  "flex items-center cursor-pointer px-2 py-1.5 rounded-lg transition-[background] duration-150 hover:bg-[rgba(128,128,140,0.1)]",
+  {
+    variants: {
+      size: {
+        default: "gap-2.5",
+        small: "gap-2",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+)
+
+const swatchColor = cva(
+  "rounded-[6px] border border-[rgba(128,128,140,0.25)] shrink-0 relative",
+  {
+    variants: {
+      size: {
+        default: "w-7 h-7",
+        small: "w-6 h-6",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+)
 
 export function ColorSwatch({ color, onChange, label, small }) {
   const ref = useRef(null)
+  const size = small ? "small" : "default"
   return (
     <div
       onClick={() => ref.current?.click()}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: small ? 8 : 10,
-        cursor: "pointer",
-        padding: "6px 8px",
-        borderRadius: 8,
-        transition: "background 0.15s",
-      }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.background = "rgba(128,128,140,0.1)")
-      }
-      onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+      className={swatchWrapper({ size })}
     >
-      <div
-        style={{
-          width: small ? 24 : 28,
-          height: small ? 24 : 28,
-          borderRadius: 6,
-          background: color,
-          border: "1px solid rgba(128,128,140,0.25)",
-          flexShrink: 0,
-          position: "relative",
-        }}
-      >
+      <div className={swatchColor({ size })} style={{ background: color }}>
         <input
           ref={ref}
           type="color"
           value={color}
           onChange={(e) => onChange(e.target.value)}
-          style={{
-            opacity: 0,
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            cursor: "pointer",
-          }}
+          className="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
         />
       </div>
-      <div style={{ minWidth: 0 }}>
-        <div
-          style={{
-            fontSize: 12,
-            color: "var(--color-text-secondary)",
-            textTransform: "capitalize",
-            lineHeight: 1.2,
-          }}
-        >
+      <div className="min-w-0">
+        <div className="text-xs text-chrome-text-secondary capitalize leading-[1.2]">
           {label}
         </div>
-        <div
-          style={{
-            fontSize: 11,
-            fontFamily: "var(--font-mono)",
-            color: "var(--color-text-tertiary)",
-            lineHeight: 1.4,
-          }}
-        >
+        <div className="text-[11px] font-mono text-chrome-text-tertiary leading-[1.4]">
           {color}
         </div>
       </div>

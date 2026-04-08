@@ -70,25 +70,13 @@ export default function MoonEditor() {
       <TopNav onToggleSidebar={() => setSidebarOpen((v) => !v)} />
       <SecondaryBar variant={variant} />
 
-      <div
-        style={{
-          flex: 1,
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          minHeight: 0,
-        }}
-      >
+      <div className="flex-1 overflow-hidden flex flex-col min-h-0">
         {view === "preview" ? (
           <Preview theme={theme} font={font} />
         ) : (
           <div
-            style={{
-              flex: 1,
-              overflow: "auto",
-              padding: "24px 32px",
-              background: theme.background,
-            }}
+            className="flex-1 overflow-auto py-6 px-8"
+            style={{ background: theme.background }}
           >
             <ExportPanel theme={theme} variant={variant} font={font} />
           </div>
