@@ -11,16 +11,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-Single-page React 19 app (Vite 8, JSX only — no TypeScript) for editing Ghostty terminal color themes. No router, no state library, no CSS framework.
+Single-page React 19 app (Vite 8, TypeScript) for editing Ghostty terminal color themes. No router, no state library, no CSS framework.
 
-**`src/MoonEditor.jsx`** is the core of the app. It contains all editor logic in one file:
-- `DEFAULTS` — built-in dark/light palette definitions (background, foreground, cursor, selection, 16-color ANSI palette)
-- `MoonEditor` — top-level stateful component managing variant (dark/light), color values, font selection, and view mode (preview/export)
-- `ColorSwatch` — clickable color picker bound to a hidden `<input type="color">`
-- `Preview` — fake terminal rendering Python code with syntax-highlighted spans colored from the palette
-- `ExportPanel` — generates and copies Ghostty-format theme config text
+**`src/MoonEditor.tsx`** — top-level stateful component managing variant (dark/light), color values, font selection, and view mode (preview/export).
 
-**`src/App.jsx`** is a thin wrapper that renders heading text and `<MoonEditor />`.
+**`src/components/`** — extracted UI components and constants:
+- `constants.ts` — `DEFAULTS` (dark/light palettes), `NAMES` (color labels), `FONTS` (font options)
+- `TopNav.tsx` — header nav bar (includes `NavItem`)
+- `SecondaryBar.tsx` — path/timing info bar
+- `ColorSwatch.tsx` — clickable color picker bound to a hidden `<input type="color">`
+- `Preview.tsx` — fake terminal rendering Python code with syntax-highlighted spans colored from the palette
+- `ExportPanel.tsx` — generates and copies Ghostty-format theme config text
+- `TerminalInput.tsx` — command input area
+- `FooterBar.tsx` — status bar
+- `EditorSidebar.tsx` — slide-out theme editor panel (variant, view, font, colors, palette)
+- `index.ts` — barrel re-exports
+
+**`src/App.tsx`** is a thin wrapper that renders `<MoonEditor />`.
 
 ## Styling
 

@@ -40,6 +40,6 @@
     }
   },
   "files": {
-    "includes": ["src/**/*.js", "src/**/*.jsx"]
+    "includes": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
   }
 }
